@@ -5,3 +5,7 @@ An api wrapper written in Java for the magic the gathering application EchoMTG. 
  * Note: Library is in beta and provided as-is
 
 _ported from https://github.com/andrewgioia/EchoPHP_ by @andrewgioia
+
+
+
+This is an open-source library, and contributions are welcome.
