@@ -7,5 +7,8 @@ An api wrapper written in Java for the magic the gathering application EchoMTG. 
 _ported from https://github.com/andrewgioia/EchoPHP_ by @andrewgioia
 
 
+## Assumed Dependencies
+* https://github.com/google/google-http-java-client
+
 
 This is an open-source library, and contributions are welcome.
