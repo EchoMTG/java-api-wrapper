@@ -7,11 +7,14 @@
  *
  * Note: Library is in beta and provided as-is
 */
- 
+
+import java.util.Arrays;
+import java.util.List;
  
 public class EchoMTGJavaAPI {
 
-    public string  = 'https://www.echomtg.com/api/';
+    
+    public static final String API_HOST = "https://www.echomtg.com/api/";
     
     private string auth_token;
     private string auth_message;
