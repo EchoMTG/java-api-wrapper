@@ -17,6 +17,14 @@ Google Volley http://developer.android.com/training/volley/index.html
         compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     }
 
+## Gradle Intall
+
+
+    repositories {
+        maven {
+            url  "http://dl.bintray.com/ardeay/EchoMTG-Java-API-Wrapper" 
+        }
+    }
 
 
 
