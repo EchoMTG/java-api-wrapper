@@ -27,31 +27,6 @@ From an inside a Activity or Fragment, you need to instantiate the singleton and
     import com.thoughtbombstudios.echomtg.EchoMTGWrapper.EchoMTGJavaAPIWrapper;
     import org.json.JSONException;
     import org.json.JSONObject;
-    .....
-    // auth example, would be inside an activity or fragment class method
-    SharedPreferences sharedPref;
-    sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-    String email = "your@email.com";
-    String pass = "asdfsbfsbsadfsa";
-    EchoMTGJavaAPIWrapper.getInstance(getActivity().getApplicationContext()).authRequest(new EchoMTGJavaAPIWrapper.EchoCallback(){
-              @Override
-              public void onSuccess(String result){
-                  JSONObject jsonObject= null;
-                  String token = null;
-                  try {
-
-                      jsonObject = new JSONObject(result);
-                      token = jsonObject.getString("token");
-
-                  } catch (JSONException e) {
-                      e.printStackTrace();
-                  }
-
-
-                  Toast.makeText(getActivity().getApplicationContext(), "Successful Login", Toast.LENGTH_SHORT).show();
-
-                  SharedPreferences.Editor editor = sharedPref.edit();
-                  editor.putString(getString(R.string.token_reference), token);
-                  editor.commit();
-              }
-          },email,pass);
+    
+    
+<script src="https://gist.github.com/ardeay/7fca0db056c2837933331c75def5c3be.js"></script>
