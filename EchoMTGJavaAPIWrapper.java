@@ -1,6 +1,3 @@
-package com.thoughtbombstudios.echomtg.EchoMTGWrapper;
-
-
 import android.content.Context;
 import android.widget.Toast;
 
