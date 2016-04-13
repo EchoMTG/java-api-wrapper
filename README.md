@@ -7,16 +7,28 @@ An api wrapper written in Java for the magic the gathering application EchoMTG. 
 _See PHP wrapper: https://github.com/andrewgioia/EchoPHP_ by @andrewgioia
 
 
-## Dependencies
-* Google Volley
-
 This is an open-source library, and contributions are welcome.
 
+## Dependencies
 
-# Exmaple Usage
+Google Volley http://developer.android.com/training/volley/index.html
+
+    dependencies {
+        compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    }
+
+
+
+
+# Example Usage
 From an inside a Activity or Fragment, you need to instantiate the singleton and feed it a call back along with parameters. In this example, shared prerences is instantiated to store the token recieved from Auth. That token will be used for every other request that will be made, and also for business logic like, if no token, show a login, else show inventory.
 
-    // inventory example
+
+    import com.thoughtbombstudios.echomtg.EchoMTGWrapper.EchoMTGJavaAPIWrapper;
+    import org.json.JSONException;
+    import org.json.JSONObject;
+    .....
+    // auth example, would be inside an activity or fragment class method
     SharedPreferences sharedPref;
     sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
     String email = "your@email.com";
