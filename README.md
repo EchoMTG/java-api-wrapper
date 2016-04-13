@@ -7,7 +7,7 @@ An api wrapper written in Java for the magic the gathering application EchoMTG. 
 _See PHP wrapper: https://github.com/andrewgioia/EchoPHP_ by @andrewgioia
 
 
-## Assumed Dependencies
+## Dependencies
 * Google Volley
 
 This is an open-source library, and contributions are welcome.
