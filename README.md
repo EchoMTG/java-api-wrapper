@@ -40,10 +40,10 @@ Imports for File
 Example of using the EchoMTGAPI Wrapper Singleton with a call back in an activity or fragment class
 
     // auth example, would be inside an activity or fragment class method
-    SharedPreferences sharedPref;
-    sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-    String email = "your@email.com";
-    String pass = "asdfsbfsbsadfsa";
+    SharedPreferences sharedPref; // use to store token locally
+    sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE); 
+    String email = "your@email.com"; // passed through UI input
+    String pass = "asdfsbfsbsadfsa"; // passed through UI input 
     EchoMTGJavaAPIWrapper.getInstance(getActivity().getApplicationContext()).authRequest(new EchoMTGJavaAPIWrapper.EchoCallback(){
           @Override
           public void onSuccess(String result){
@@ -57,14 +57,16 @@ Example of using the EchoMTGAPI Wrapper Singleton with a call back in an activit
               } catch (JSONException e) {
                   e.printStackTrace();
               }
-
-
-              Toast.makeText(getActivity().getApplicationContext(), "Successful Login", Toast.LENGTH_SHORT).show();
-
+              
+              // example code to store token to shared preferences
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString(getString(R.string.token_reference), token);
               editor.commit();
           }
+          public void onFailure(Error result) {
+            //your error code
+          }
+          
       },email,pass);
     
 Link to Gist https://gist.github.com/ardeay/7fca0db056c2837933331c75def5c3be.js
