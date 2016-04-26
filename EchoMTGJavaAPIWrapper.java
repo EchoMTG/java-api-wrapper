@@ -1,6 +1,5 @@
-import android.content.Context;
-import android.widget.Toast;
 
+import android.content.Context;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -10,7 +9,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,12 +22,13 @@ public class EchoMTGJavaAPIWrapper {
     private static EchoMTGJavaAPIWrapper mInstance;
     private RequestQueue mRequestQueue;
     private static Context mCtx;
+    private static final String app_name = "your_app_name"; // register with teeg at echomtg dot com
 
     private EchoMTGJavaAPIWrapper(Context context)
     {
         mCtx = context;
         mRequestQueue = getRequestQueue();
-        
+
     }
 
     public static synchronized EchoMTGJavaAPIWrapper getInstance(Context context) {
@@ -53,11 +52,83 @@ public class EchoMTGJavaAPIWrapper {
     }
 
 
-
     public void authRequest(final EchoCallback callback, final String email, final String pass){
         String url = API_HOST + "user/auth/";
 
-        Toast.makeText(mCtx, "Attempting to authenticate "+email, Toast.LENGTH_SHORT).show();
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        // call back to your app
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        //error here
+                        callback.onSuccess(response);
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("password", pass);
+                params.put("app", app_name);
+                return params;
+            }
+        };
+
+        addToRequestQueue(strRequest);
+    }
+
+    public void registerUser(final EchoCallback callback, final String username, final String email, final String pass){
+        String url = API_HOST + "user/register/";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        // execute your code in the main app 
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        //error here
+                        callback.onFailure("error");
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("username", username);
+                params.put("password", pass);
+                params.put("app", app_name);
+                return params;
+            }
+        };
+
+        addToRequestQueue(strRequest);
+    }
+
+    public void addToInventory(final EchoCallback callback, final String auth, final String mid, final String foil){
+        String url = API_HOST + "inventory/add/";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -75,7 +146,8 @@ public class EchoMTGJavaAPIWrapper {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Toast.makeText(mCtx, error.toString(), Toast.LENGTH_SHORT).show();
+                        //error here
+                        callback.onFailure("error");
                     }
                 })
         {
@@ -83,8 +155,10 @@ public class EchoMTGJavaAPIWrapper {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", pass);
+                params.put("mid", mid);
+                params.put("foil", foil);
+                params.put("auth", auth);
+
                 return params;
             }
         };
@@ -92,8 +166,11 @@ public class EchoMTGJavaAPIWrapper {
         addToRequestQueue(strRequest);
     }
 
+
     public interface EchoCallback{
         void onSuccess(String result);
+
+        void onFailure(String error);
     }
 
 }
