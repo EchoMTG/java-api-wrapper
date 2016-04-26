@@ -127,7 +127,7 @@ public class EchoMTGJavaAPIWrapper {
         addToRequestQueue(strRequest);
     }
 
-    public void addToInventory(final EchoCallback callback, final String auth, final String mid, final String foil){
+     public void addToInventory(final EchoCallback callback, final String auth, final int mid, final boolean foil){
         String url = API_HOST + "inventory/add/";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
@@ -155,8 +155,8 @@ public class EchoMTGJavaAPIWrapper {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("mid", mid);
-                params.put("foil", foil);
+                params.put("mid", Integer.toString(mid));
+                params.put("foil", Boolean.toString(foil));
                 params.put("auth", auth);
 
                 return params;
