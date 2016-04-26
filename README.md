@@ -17,7 +17,10 @@ Google Volley http://developer.android.com/training/volley/index.html
         compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     }
 
-## Gradle Intall
+## Add the INTERNET Permission
+To use Volley, you must add the `android.permission.INTERNET` permission to your app's manifest. Without this, your app won't be able to connect to the network.
+
+## Gradle Install
 
 
     repositories {
