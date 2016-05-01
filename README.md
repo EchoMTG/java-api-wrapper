@@ -70,3 +70,45 @@ Example of using the EchoMTGAPI Wrapper Singleton with a call back in an activit
       },email,pass);
     
 Link to Gist https://gist.github.com/ardeay/7fca0db056c2837933331c75def5c3be.js
+
+## Example of adding to inventory
+
+    public void addToInventory(final int multiverse_id, final boolean foil) {
+        Log.e(TAG,"add to inventory");
+        final String[] message = new String[1];
+        String auth = getToken(); // this is a method to get a locally stored token, it accesses shared preferences
+
+        EchoMTGJavaAPIWrapper.getInstance(getApplicationContext()).addToInventory(new EchoMTGJavaAPIWrapper.EchoCallback(){
+            @Override
+            public void onSuccess(JSONObject jsonObject){
+
+                try {
+
+                    message[0] = jsonObject.getString("message");
+                    Snackbar.make(getCurrentFocus(), message[0], Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                   // if you run local SQL run your logic here
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            public void onFailure(String error) {
+
+
+            }
+
+        }, auth, multiverse_id, foil );
+
+    }
+
+
+## Exmaple getToken() method
+
+    public String getToken(){
+        token = sharedPref.getString( getString(R.string.token_reference), "" );
+        return token;
+    }
