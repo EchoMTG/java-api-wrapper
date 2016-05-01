@@ -49,14 +49,11 @@ Example of using the EchoMTGAPI Wrapper Singleton with a call back in an activit
     String pass = "asdfsbfsbsadfsa"; // passed through UI input 
     EchoMTGJavaAPIWrapper.getInstance(getActivity().getApplicationContext()).authRequest(new EchoMTGJavaAPIWrapper.EchoCallback(){
           @Override
-          public void onSuccess(String result){
-              JSONObject jsonObject= null;
+          public void onSuccess(JSONObject result){
+              JSONObject jsonObject = result;
               String token = null;
               try {
-
-                  jsonObject = new JSONObject(result);
                   token = jsonObject.getString("token");
-
               } catch (JSONException e) {
                   e.printStackTrace();
               }
